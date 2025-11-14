@@ -306,10 +306,6 @@ except Exception as e:
     st.stop()
 
 
-xls = pd.ExcelFile(data_path)
-
-
-
 # Deviation sheet
 if "Deviation" not in xls.sheet_names:
     st.error("Workbook must contain sheet named 'Deviation'.")
