@@ -1053,11 +1053,20 @@ signal_summary_df["TriggerDate"] = signal_summary_df["TriggerDate"].dt.strftime(
 st.subheader("Signal-Level Summary (Deviation Backtest)")
 st.markdown(
     """
-    <div style="width:100%; display:flex; justify-content:center;">
-        <div style="width:85%;"> 
+    <style>
+    .right-table-container {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;   /* <— pushes table to the right */
+    }
+    .right-table-container > div {
+        width: 70%;                  /* adjust size: 50–90% */
+    }
+    </style>
     """,
     unsafe_allow_html=True
 )
+st.markdown('<div class="right-table-container"><div>', unsafe_allow_html=True)
 
 st.dataframe(
     signal_summary_df.style.format(
@@ -1067,16 +1076,12 @@ st.dataframe(
             "Plus60d_Return": "{:.2%}",
             "Sharpe_60d": "{:.2f}",
         }
-    )
+    ),
+    use_container_width=True
 )
 
-st.markdown(
-    """
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown('</div></div>', unsafe_allow_html=True)
+
 
 
 
