@@ -1601,9 +1601,9 @@ for stop in stop_vals:
         trades_table.append(
             {
                 "Entry": entry_time,
-                "EntryPrice": float(entry_price),
+                "Entry Price": float(entry_price),
                 "Exit": exit_time,
-                "ExitPrice": float(exit_price),
+                "Exit Price": float(exit_price),
                 "Trade Length": xrt_px.index.get_loc(exit_time) - xrt_px.index.get_loc(entry_time),
                 "Return": float(exit_ret),
                 "Stopped": bool(stop_hit),
@@ -1773,8 +1773,8 @@ else:
     # --- Display with proper rounding ---
     st.dataframe(
         td.style.format({
-            "EntryPrice": "{:.2f}",
-            "ExitPrice": "{:.2f}",
+            "Entry Price": "{:.2f}",
+            "Exit Price": "{:.2f}",
             "Return": "{:.2%}",
             "HoldBars": "{:.0f}",
         }),
