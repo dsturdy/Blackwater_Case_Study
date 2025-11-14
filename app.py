@@ -18,31 +18,70 @@ import streamlit as st
 from dataclasses import dataclass
 from bvol_optimizer import optimize_stoploss
 st.set_page_config(page_title="Deviation & BVOL Case Study", layout="wide")
-# --- GLOBAL TABLE WIDTH + CENTERING FIX ---
+# -----------------------------------------------------------
+# GLOBAL STYLING FIXES
+# -----------------------------------------------------------
 st.markdown("""
-    <style>
-        /* Center everything inside main container */
-        .block-container {
-            padding-top: 2rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+<style>
 
-        /* Make all tables use more horizontal space */
-        table {
-            width: 100% !important;
-        }
-        thead tr th {
-            font-size: 15px !important;
-            padding: 6px 10px !important;
-        }
-        tbody tr td {
-            font-size: 15px !important;
-            padding: 6px 10px !important;
-        }
-    </style>
+/* Center everything inside the main container */
+.block-container {
+    max-width: 1400px !important;
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+}
+
+/* Make all section headings bigger & bolder */
+h1, h2, h3 {
+    font-weight: 700 !important;
+}
+
+/* Increase default font size slightly */
+html, body, p, div, span {
+    font-size: 1.05rem !important;
+}
+
+/* Center tables and make them wider */
+table {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.dataframe {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Make tables cleaner */
+thead th {
+    font-size: 0.95rem !important;
+    text-align: center !important;
+    font-weight: 600 !important;
+}
+
+tbody td {
+    font-size: 0.93rem !important;
+    text-align: center !important;
+}
+
+/* Buttons centered */
+.stButton > button {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+    font-size: 1.05rem !important;
+    padding: 0.6rem 1.2rem !important;
+}
+
+/* Expand Plotly charts slightly */
+.js-plotly-plot {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+</style>
 """, unsafe_allow_html=True)
+
 
 TOOLTIP_CSS = """
 <style>
