@@ -1681,14 +1681,16 @@ else:
 
     show_cols = [stop_col, "avg", "median", "sharpe", "trades", "stopped_trades", "stop_hits", "pos_rate"]
 
-
 with st.container():
     st.markdown(
         """
-        <div style="width:100%; display:flex; justify-content:flex-end;">
-            <div style="width:70%;">
+        <div style="
+            width:100%;
+            display:block;
+            transform: translateX(25%);
+        ">
         """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
     st.dataframe(
@@ -1701,15 +1703,14 @@ with st.container():
                 "pos_rate": "{:.1%}",
             }
         ),
-        use_container_width=False,
+        use_container_width=True
     )
 
     st.markdown(
         """
-            </div>
         </div>
         """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
 
