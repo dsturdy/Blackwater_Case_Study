@@ -18,6 +18,32 @@ import streamlit as st
 from dataclasses import dataclass
 from bvol_optimizer import optimize_stoploss
 st.set_page_config(page_title="Deviation & BVOL Case Study", layout="wide")
+# --- GLOBAL TABLE WIDTH + CENTERING FIX ---
+st.markdown("""
+    <style>
+        /* Center everything inside main container */
+        .block-container {
+            padding-top: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Make all tables use more horizontal space */
+        table {
+            width: 100% !important;
+        }
+        thead tr th {
+            font-size: 15px !important;
+            padding: 6px 10px !important;
+        }
+        tbody tr td {
+            font-size: 15px !important;
+            padding: 6px 10px !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 TOOLTIP_CSS = """
 <style>
 .tooltip {
