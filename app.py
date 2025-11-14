@@ -94,7 +94,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-
 TOOLTIP_CSS = """
 <style>
 .tooltip {
@@ -105,20 +104,6 @@ TOOLTIP_CSS = """
   cursor: help;
   border-bottom: 1px dotted #888;
 }
-
-st.markdown("""
-<style>
-.right-table-container {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;   /* <— RIGHT ALIGN */
-}
-.right-table-container > div {
-    width: 70%;                  /* adjust width 50–90% */
-}
-</style>
-""", unsafe_allow_html=True)
-
 
 .tooltip .tooltiptext {
   visibility: hidden;
@@ -145,7 +130,6 @@ st.markdown("""
 }
 </style>
 """
-
 st.markdown(TOOLTIP_CSS, unsafe_allow_html=True)
 
 
