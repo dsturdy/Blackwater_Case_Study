@@ -1051,21 +1051,33 @@ signal_summary_df = pd.DataFrame(signal_summary_rows).sort_values("TriggerDate")
 signal_summary_df["TriggerDate"] = signal_summary_df["TriggerDate"].dt.strftime("%Y-%m-%d")
 
 st.subheader("Signal-Level Summary (Deviation Backtest)")
-st.markdown('<div class="centered-block"><div class="wide-table">', unsafe_allow_html=True)
+st.markdown(
+    """
+    <div style="width:100%; display:flex; justify-content:center;">
+        <div style="width:85%;"> 
+    """,
+    unsafe_allow_html=True
+)
 
 st.dataframe(
     signal_summary_df.style.format(
         {
             "Deviation": "{:.2f}",
-            "Price_at_Trigger": "{:.2f}",
             "Minus60d_Return": "{:.2%}",
             "Plus60d_Return": "{:.2%}",
-            "Plus60d_Hit": "{:.0%}",
             "Sharpe_60d": "{:.2f}",
         }
     )
 )
-st.markdown('</div></div>', unsafe_allow_html=True)
+
+st.markdown(
+    """
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 
 
 st.download_button(
