@@ -81,25 +81,19 @@ tbody td {
 
 </style>
 """, unsafe_allow_html=True)
-
-# -----------------------
-# Center all tables/charts nicely
-# -----------------------
 st.markdown("""
 <style>
-.centered-block {
-    display: flex;
-    justify-content: center;
+.right-table-container {
     width: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    display: flex;
+    justify-content: flex-end;   /* RIGHT ALIGN */
 }
-.wide-table {
-    width: 90%;
-    max-width: 1200px;
+.right-table-container > div {
+    width: 70%;   /* adjust width 50–90% */
 }
 </style>
 """, unsafe_allow_html=True)
+
 
 TOOLTIP_CSS = """
 <style>
