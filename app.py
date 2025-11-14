@@ -1072,6 +1072,7 @@ st.dataframe(
     signal_summary_df.style.format(
         {
             "Deviation": "{:.2f}",
+            "Price_at_Trigger": "{:.2f}",
             "Minus60d_Return": "{:.2%}",
             "Plus60d_Return": "{:.2%}",
             "Sharpe_60d": "{:.2f}",
