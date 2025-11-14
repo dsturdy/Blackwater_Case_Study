@@ -94,6 +94,24 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+<style>
+
+/* The magic fix */
+.right-align .element-container {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    width: 70% !important;
+}
+
+.right-align {
+    display: flex;
+    width: 100%;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
 TOOLTIP_CSS = """
 <style>
 .tooltip {
@@ -1663,26 +1681,9 @@ else:
 
     show_cols = [stop_col, "avg", "median", "sharpe", "trades", "stopped_trades", "stop_hits", "pos_rate"]
 
-    st.markdown(
-    """
-    <style>
-    .right-table-container {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;   /* <— pushes table to the right */
-    }
-    .right-table-container > div {
-        width: 70%;                  /* adjust size: 50–90% */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 
     
-    st.markdown('<div class="right-table-container"><div>', unsafe_allow_html=True)
-
+    st.markdown('<div class="right-align">', unsafe_allow_html=True)
 
     st.dataframe(
         res_df[show_cols].set_index(stop_col).style.format(
@@ -1696,7 +1697,8 @@ else:
         ),
         use_container_width=False
     )
-    st.markdown('</div></div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 # ─────────────────────────────────────────────────────────────
