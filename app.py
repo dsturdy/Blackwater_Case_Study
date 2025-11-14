@@ -1693,7 +1693,8 @@ else:
                 "stop_hits": "{:.1%}",
                 "pos_rate": "{:.1%}",
             }
-        )
+        ),
+        use_container_width=False
     )
     st.markdown('</div></div>', unsafe_allow_html=True)
 
@@ -1776,7 +1777,8 @@ else:
             "ExitPrice": "{:.2f}",
             "Return": "{:.2%}",
             "HoldBars": "{:.0f}",
-        })
+        }),
+        use_container_width=False
     )
     st.markdown('</div></div>', unsafe_allow_html=True)
 
