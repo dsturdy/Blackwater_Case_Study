@@ -299,9 +299,12 @@ data_path = "BW_Test_Pack_Data.xlsx"
 
 
 
-if not data_path or not os.path.exists(data_path):
-    st.warning("Enter a valid Excel file path.")
+try:
+    xls = pd.ExcelFile(data_path)
+except Exception as e:
+    st.error(f"Could not load Excel file: {e}")
     st.stop()
+
 
 xls = pd.ExcelFile(data_path)
 
