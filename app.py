@@ -56,12 +56,6 @@ TOOLTIP_CSS = """
 
 st.markdown(TOOLTIP_CSS, unsafe_allow_html=True)
 
-# Optional (for Lowess smoothing)
-try:
-    import statsmodels.api as sm
-    HAVE_SM = True
-except Exception:
-    HAVE_SM = False
 
 st.set_page_config(page_title="Deviation & BVOL Case Study", layout="wide")
 
@@ -95,19 +89,22 @@ def _to_dt(s: pd.Series) -> pd.Series:
 
 
 def lowess(y, x, frac=0.3):
-    if not HAVE_SM:
-        order = np.argsort(x)
-        x_s, y_s = x[order], y[order]
-        n = max(5, int(len(y_s) * min(0.2, frac)))
-        smth = (
-            pd.Series(y_s)
-            .rolling(n, center=True, min_periods=max(3, n // 2))
-            .mean()
-            .to_numpy()
-        )
-        return x_s, smth
-    res = sm.nonparametric.lowess(y, x, frac=frac, return_sorted=True)
-    return res[:, 0], res[:, 1]
+    """Lightweight LOWESS approximation (no statsmodels required)."""
+    order = np.argsort(x)
+    x_s, y_s = x[order], y[order]
+
+    # window size proportional to frac
+    n = max(5, int(len(y_s) * frac))
+
+    smth = (
+        pd.Series(y_s)
+        .rolling(n, center=True, min_periods=max(3, n // 2))
+        .mean()
+        .to_numpy()
+    )
+
+    return x_s, smth
+
 
 
 def forward_return(series: pd.Series, horizon: int) -> pd.Series:
