@@ -1768,25 +1768,18 @@ else:
     if "Exit" in td.columns:
         td["Exit"] = pd.to_datetime(td["Exit"]).dt.strftime("%Y-%m-%d")
 
+with st.container():
     st.markdown(
-    """
-    <style>
-    .right-table-container {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;   /* <— pushes table to the right */
-    }
-    .right-table-container > div {
-        width: 70%;                  /* adjust size: 50–90% */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-    st.markdown('<div class="right-table-container"><div>', unsafe_allow_html=True)
+        """
+        <div style="
+            width:100%;
+            display:block;
+            transform: translateX(25%);
+        ">
+        """,
+        unsafe_allow_html=True
+    )
 
-
-    # --- Display with proper rounding ---
     st.dataframe(
         td.style.format({
             "Entry Price": "{:.2f}",
@@ -1794,10 +1787,15 @@ else:
             "Return": "{:.2%}",
             "HoldBars": "{:.0f}",
         }),
-        use_container_width=False
+        use_container_width=True
     )
-    st.markdown('</div></div>', unsafe_allow_html=True)
 
+    st.markdown(
+        """
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
     st.download_button(
