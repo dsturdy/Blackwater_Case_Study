@@ -17,6 +17,7 @@ import plotly.express as px
 import streamlit as st
 from dataclasses import dataclass
 from bvol_optimizer import optimize_stoploss
+st.set_page_config(page_title="Deviation & BVOL Case Study", layout="wide")
 TOOLTIP_CSS = """
 <style>
 .tooltip {
@@ -58,7 +59,7 @@ st.markdown(TOOLTIP_CSS, unsafe_allow_html=True)
 
 
 
-st.set_page_config(page_title="Deviation & BVOL Case Study", layout="wide")
+
 
 
 PLOT_BG = "#ffffff"
