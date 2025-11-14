@@ -82,6 +82,24 @@ tbody td {
 </style>
 """, unsafe_allow_html=True)
 
+# -----------------------
+# Center all tables/charts nicely
+# -----------------------
+st.markdown("""
+<style>
+.centered-block {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.wide-table {
+    width: 90%;
+    max-width: 1200px;
+}
+</style>
+""", unsafe_allow_html=True)
 
 TOOLTIP_CSS = """
 <style>
@@ -1033,6 +1051,8 @@ signal_summary_df = pd.DataFrame(signal_summary_rows).sort_values("TriggerDate")
 signal_summary_df["TriggerDate"] = signal_summary_df["TriggerDate"].dt.strftime("%Y-%m-%d")
 
 st.subheader("Signal-Level Summary (Deviation Backtest)")
+st.markdown('<div class="centered-block"><div class="wide-table">', unsafe_allow_html=True)
+
 st.dataframe(
     signal_summary_df.style.format(
         {
@@ -1045,6 +1065,8 @@ st.dataframe(
         }
     )
 )
+st.markdown('</div></div>', unsafe_allow_html=True)
+
 
 st.download_button(
     "Download Signal Summary CSV",
