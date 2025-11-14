@@ -1683,7 +1683,14 @@ else:
 
 
     
-    st.markdown('<div class="right-align">', unsafe_allow_html=True)
+    with st.container():
+    st.markdown(
+        """
+        <div style="width:100%; display:flex; justify-content:flex-end;">
+            <div style="width:70%;">
+        """,
+        unsafe_allow_html=True
+    )
 
     st.dataframe(
         res_df[show_cols].set_index(stop_col).style.format(
@@ -1697,7 +1704,13 @@ else:
         ),
         use_container_width=False
     )
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown(
+        """
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
 
