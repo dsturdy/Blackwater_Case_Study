@@ -1662,6 +1662,20 @@ else:
     stop_col = "stop"
 
     show_cols = [stop_col, "avg", "median", "sharpe", "trades", "stopped_trades", "stop_hits", "pos_rate"]
+
+    st.markdown("""
+<style>
+.right-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;   /* push to right */
+}
+.right-wrap > div {
+    width: 75%;                  /* controls table width */
+}
+</style>
+""", unsafe_allow_html=True)
+
     
     st.markdown('<div class="right-table-container"><div>', unsafe_allow_html=True)
 
