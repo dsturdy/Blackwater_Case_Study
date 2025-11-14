@@ -1663,21 +1663,26 @@ else:
 
     show_cols = [stop_col, "avg", "median", "sharpe", "trades", "stopped_trades", "stop_hits", "pos_rate"]
 
-    st.markdown("""
-<style>
-.right-wrap {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;   /* push to right */
-}
-.right-wrap > div {
-    width: 75%;                  /* controls table width */
-}
-</style>
-""", unsafe_allow_html=True)
+    st.markdown(
+    """
+    <style>
+    .right-table-container {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;   /* <— pushes table to the right */
+    }
+    .right-table-container > div {
+        width: 70%;                  /* adjust size: 50–90% */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 
     
     st.markdown('<div class="right-table-container"><div>', unsafe_allow_html=True)
+
 
     st.dataframe(
         res_df[show_cols].set_index(stop_col).style.format(
@@ -1691,6 +1696,7 @@ else:
         )
     )
     st.markdown('</div></div>', unsafe_allow_html=True)
+
 
 # ─────────────────────────────────────────────────────────────
 # Drill-Down Trade Tables
@@ -1745,7 +1751,23 @@ else:
     if "Exit" in td.columns:
         td["Exit"] = pd.to_datetime(td["Exit"]).dt.strftime("%Y-%m-%d")
 
+    st.markdown(
+    """
+    <style>
+    .right-table-container {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;   /* <— pushes table to the right */
+    }
+    .right-table-container > div {
+        width: 70%;                  /* adjust size: 50–90% */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
     st.markdown('<div class="right-table-container"><div>', unsafe_allow_html=True)
+
 
     # --- Display with proper rounding ---
     st.dataframe(
