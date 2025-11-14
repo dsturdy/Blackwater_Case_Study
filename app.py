@@ -112,6 +112,20 @@ TOOLTIP_CSS = """
   border-bottom: 1px dotted #888;
 }
 
+st.markdown("""
+<style>
+.right-table-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;   /* <— RIGHT ALIGN */
+}
+.right-table-container > div {
+    width: 70%;                  /* adjust width 50–90% */
+}
+</style>
+""", unsafe_allow_html=True)
+
+
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 260px;
@@ -1084,8 +1098,6 @@ st.dataframe(
 st.markdown('</div></div>', unsafe_allow_html=True)
 
 
-
-
 st.download_button(
     "Download Signal Summary CSV",
     data=signal_summary_df.to_csv(index=False).encode(),
@@ -1483,8 +1495,6 @@ xrt_px = bv["xrt"].astype(float)
 # ─────────────────────────────────────────────────────────────────────────────
 
 
-
-
 results = []
 all_trades_tables = {}
 
@@ -1674,6 +1684,8 @@ else:
     stop_col = "stop"
 
     show_cols = [stop_col, "avg", "median", "sharpe", "trades", "stopped_trades", "stop_hits", "pos_rate"]
+    
+    st.markdown('<div class="right-table-container"><div>', unsafe_allow_html=True)
 
     st.dataframe(
         res_df[show_cols].set_index(stop_col).style.format(
@@ -1686,6 +1698,7 @@ else:
             }
         )
     )
+    st.markdown('</div></div>', unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────
 # Drill-Down Trade Tables
@@ -1740,6 +1753,8 @@ else:
     if "Exit" in td.columns:
         td["Exit"] = pd.to_datetime(td["Exit"]).dt.strftime("%Y-%m-%d")
 
+    st.markdown('<div class="right-table-container"><div>', unsafe_allow_html=True)
+
     # --- Display with proper rounding ---
     st.dataframe(
         td.style.format({
@@ -1749,6 +1764,8 @@ else:
             "HoldBars": "{:.0f}",
         })
     )
+    st.markdown('</div></div>', unsafe_allow_html=True)
+
 
 
     st.download_button(
