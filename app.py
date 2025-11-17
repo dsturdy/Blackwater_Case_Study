@@ -18,188 +18,113 @@ import streamlit as st
 from dataclasses import dataclass
 from bvol_optimizer import optimize_stoploss
 st.set_page_config(page_title="Deviation & BVOL Case Study", layout="wide")
-# -----------------------------------------------------------
-# GLOBAL STYLING FIXES
-# -----------------------------------------------------------
-st.markdown("""
-<style>
-
-/* Center everything inside the main container */
-.block-container {
-    max-width: 1400px !important;
-    padding-left: 3rem !important;
-    padding-right: 3rem !important;
-}
-
-/* Make all section headings bigger & bolder */
-h1, h2, h3 {
-    font-weight: 700 !important;
-}
-
-/* Increase default font size slightly */
-html, body, p, div, span {
-    font-size: 1.05rem !important;
-}
-
-/* Center tables and make them wider */
-table {
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-.dataframe {
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-/* Make tables cleaner */
-thead th {
-    font-size: 0.95rem !important;
-    text-align: center !important;
-    font-weight: 600 !important;
-}
-
-tbody td {
-    font-size: 0.93rem !important;
-    text-align: center !important;
-}
-
-/* Buttons centered */
-.stButton > button {
-    margin-left: auto !important;
-    margin-right: auto !important;
-    display: block !important;
-    font-size: 1.05rem !important;
-    padding: 0.6rem 1.2rem !important;
-}
-
-/* Expand Plotly charts slightly */
-.js-plotly-plot {
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-</style>
-""", unsafe_allow_html=True)
-st.markdown("""
-<style>
-.right-table-container {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;   /* RIGHT ALIGN */
-}
-.right-table-container > div {
-    width: 70%;   /* adjust width 50–90% */
-}
-</style>
-""", unsafe_allow_html=True)
 
 st.markdown("""
 <style>
 
-/* The magic fix */
-.right-align .element-container {
-    margin-left: auto !important;
-    margin-right: 0 !important;
-    width: 70% !important;
-}
+    /* ------------------------------------------- */
+    /* GLOBAL LAYOUT SPACING (tight but readable)  */
+    /* ------------------------------------------- */
 
-.right-align {
-    display: flex;
-    width: 100%;
-}
+    .block-container {
+        padding-top: 0.8rem !important;
+        padding-bottom: 1.2rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        overflow: visible !important;  /* allows tooltips to escape */
+    }
+
+    /* Reduce the big empty vertical gaps Streamlit adds */
+    div[data-testid="stVerticalBlock"] {
+        margin-top: 0.3rem !important;
+        margin-bottom: 0.3rem !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    /* Reduce extra padding inside column elements */
+    [data-testid="column"] {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+
+    /* ------------------------------------------- */
+    /* TYPOGRAPHY / HEADINGS                       */
+    /* ------------------------------------------- */
+
+    h1, h2, h3, h4 {
+        margin-top: 0.4rem !important;
+        margin-bottom: 0.6rem !important;
+        font-weight: 700 !important;
+    }
+
+    p {
+        margin-top: 0.25rem !important;
+        margin-bottom: 0.25rem !important;
+    }
+
+
+    /* ------------------------------------------- */
+    /* WIDGET SPACING (dropdowns, sliders, etc.)   */
+    /* ------------------------------------------- */
+
+    .stSelectbox, .stSlider, .stNumberInput,
+    .stMultiSelect, .stRadio {
+        margin-top: -0.1rem !important;
+        margin-bottom: -0.1rem !important;
+    }
+
+
+    /* ------------------------------------------- */
+    /* TABLE IMPROVEMENTS                          */
+    /* ------------------------------------------- */
+
+    /* Center tables & make them wider */
+    table {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 90% !important;
+    }
+
+    /* Improve table readability */
+    thead th {
+        font-weight: 700 !important;
+        text-align: center !important;
+    }
+
+    tbody td {
+        text-align: center !important;
+        padding: 6px 8px !important;
+    }
+
+
+    /* ------------------------------------------- */
+    /* TOOLTIP SUPPORT                             */
+    /* ------------------------------------------- */
+
+    .tooltip {
+        margin-top: -4px !important;
+        position: relative;
+        display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+        position: absolute;
+        z-index: 9999 !important;
+    }
+
+
+    /* ------------------------------------------- */
+    /* OPTIONAL: SLIGHTLY TIGHTER PLOT AREA        */
+    /* ------------------------------------------- */
+
+    .stPlotlyChart {
+        margin-top: 0.4rem !important;
+    }
 
 </style>
 """, unsafe_allow_html=True)
-
-TOOLTIP_CSS = """
-<style>
-.tooltip {
-  position: relative;
-  display: inline-block;
-  font-size: 14px;
-  color: #555;
-  cursor: help;
-  border-bottom: 1px dotted #888;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 260px;
-  background-color: #2c2c2c;
-  color: #fff;
-  text-align: left;
-  border-radius: 6px;
-  padding: 10px 12px;
-  position: absolute;
-  z-index: 10;
-  bottom: 125%; 
-  left: 50%;
-  margin-left: -130px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  font-size: 13px;
-  line-height: 1.35;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-}
-</style>
-"""
-st.markdown(TOOLTIP_CSS, unsafe_allow_html=True)
-
-st.markdown("""
-<style>
-
-/* Reduce Streamlit's default vertical spacing massively */
-.block-container {
-    padding-top: 1rem !important;
-}
-
-/* Reduce space above/below headings */
-h1, h2, h3, h4 {
-    margin-top: 0.4rem !important;
-    margin-bottom: 0.6rem !important;
-}
-
-/* Reduce spacing between widgets (selectbox, sliders, etc.) */
-.stSelectbox, .stSlider, .stNumberInput {
-    margin-top: -0.4rem !important;
-    margin-bottom: -0.2rem !important;
-}
-
-/* Remove giant whitespace around each row of Streamlit containers */
-div[data-testid="stVerticalBlock"] {
-    padding-top: 0.1rem !important;
-    padding-bottom: 0.1rem !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-/* Shrink the space Streamlit adds before/after columns */
-.css-1kyxreq, .css-12oz5g7, .css-1lcbmhc {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-/* Tighten spacing around tooltips */
-.tooltip {
-    margin-top: -6px !important;
-    margin-bottom: -4px !important;
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-
-
-
-
-
 
 PLOT_BG = "#ffffff"
 ACCENT_RED = "#d62728"
