@@ -411,8 +411,8 @@ Deviation Scatter
 - Computes 20-day forward return as:  
 - All deviation readings and returns are plotted  
 - Trend can be fitted using:  
-  - **Linear OLS** (global slope)  
-  - **LOWESS** (local non-parametric smoothing)  
+  - Linear OLS (global slope)  
+  - LOWESS (local non-parametric smoothing)  
 - Range filters and percentile/quartile filters highlight tail behavior  
 
 Deviation Backtest
