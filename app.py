@@ -150,6 +150,52 @@ TOOLTIP_CSS = """
 """
 st.markdown(TOOLTIP_CSS, unsafe_allow_html=True)
 
+st.markdown("""
+<style>
+
+/* Reduce Streamlit's default vertical spacing massively */
+.block-container {
+    padding-top: 1rem !important;
+}
+
+/* Reduce space above/below headings */
+h1, h2, h3, h4 {
+    margin-top: 0.4rem !important;
+    margin-bottom: 0.6rem !important;
+}
+
+/* Reduce spacing between widgets (selectbox, sliders, etc.) */
+.stSelectbox, .stSlider, .stNumberInput {
+    margin-top: -0.4rem !important;
+    margin-bottom: -0.2rem !important;
+}
+
+/* Remove giant whitespace around each row of Streamlit containers */
+div[data-testid="stVerticalBlock"] {
+    padding-top: 0.1rem !important;
+    padding-bottom: 0.1rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Shrink the space Streamlit adds before/after columns */
+.css-1kyxreq, .css-12oz5g7, .css-1lcbmhc {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Tighten spacing around tooltips */
+.tooltip {
+    margin-top: -6px !important;
+    margin-bottom: -4px !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
 
 
 
